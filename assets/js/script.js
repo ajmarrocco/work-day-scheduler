@@ -8,38 +8,42 @@ var hours = 18;
 currentTimeEl.text(moment().format("dddd, MMMM Do"));
 
 
-var colorBlocks = function(time){
-    var currentHourEl = moment().format("hA");
-    console.log(currentHourEl);
-    console.log(moment(currentHourEl).isAfter(time));
-    console.log(moment(currentHourEl).isBefore(time));
-    console.log(time);
+var colorBlocks = function(timeAndDay, index){
+    // var currentHourEl = moment().format("YYYY-MM-D, hA");
+    var currentHourEl = moment().format();
+    // console.log(currentHourEl);
+    timeAndDay = moment(timeAndDay, "hA").format();
+    // console.log(timeAndDay);
 
-    console.log(moment('5PM').isAfter('4PM', 'hour'));
+    // timeAndDay = moment(timeAndDay, "hA").format("YYYY-MM-D, hA");
+    // console.log(timeAndDay);
 
-    console.log(moment('2010-10-20').isAfter('2010-10-19'));
+    // console.log(moment('5PM').isAfter('4PM', 'hour'));
 
+    // console.log(moment('2010-10-20').isAfter('2010-10-19'));
+    console.log(timeAndDay);
+    
+    console.log(moment(currentHourEl, 'YYYY-MM-D, hA').isAfter(timeAndDay));
+    console.log(moment(currentHourEl, 'YYYY-MM-D, hA').isBefore(timeAndDay));  
+    // var after = moment(currentHourEl, 'YYYY-MM-D, hA').isAfter(timeAndDay); 
+    // var before = moment(currentHourEl, 'YYYY-MM-D, hA').isAfter(timeAndDay);    
 
-    if (moment('currentHourEl','h:mma').isAfter('time','h:mma')){
-        $("h4").addClass("future");
-    } else if (moment('currentHourEl','h:mma').isBefore('time','h:mma')){
-        $("h4").addClass("past");
+    if (moment(currentHourEl, 'YYYY-MM-D, hA').isBefore(timeAndDay)){
+        console.log(moment(currentHourEl, 'YYYY-MM-D, hA').isBefore(timeAndDay)); 
+        $("#hour"+ index).addClass("future");
+    } else if (moment(currentHourEl, 'YYYY-MM-D, hA').isAfter(timeAndDay)){
+        $("#hour"+ index).addClass("past");
     } else{
-        $("h4").addClass("present");
+        $("#hour"+ index).addClass("present");
     }
-    // if (currentHourEl > time){
-    //     $(".card-header").addClass("future");
-    // } else if (currentHourEl < time){
-    //     $(".card-header").addClass("past");
-    // } else{
-    //     $(".card-header").addClass("present");
-    // }
 }
 
 //creates card container and appends div and h4
-var createCard = function(text){
+var createCard = function(text, index){
+    console.log(text);
+    console.log(index);
     var cardContainer = $("#time-blocks");
-    cardContainer.append("<div class='card'><h4 class='card-header d-flex align-items-center'>" + text + "</h4></div>");
+    cardContainer.append("<div class='card'><h4 id='hour"+ index +"' class='card-header d-flex align-items-center'>" + text + "</h4></div>");
 }
 
 //adds AM or PM to time and changes zero to 12
@@ -53,8 +57,8 @@ var formatTime = function(time){
 //loops through format time and create card
 var timeBlocks = function(){
     for(let i=9; i < hours; i++){
-        createCard(formatTime(i));
-        colorBlocks(formatTime(i));
+        createCard(formatTime(i), i);
+        colorBlocks(formatTime(i), i);
     }
 }
 
