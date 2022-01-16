@@ -7,41 +7,28 @@ var hours = 18;
 //sets text of currentTimeEl to current day
 currentTimeEl.text(moment().format("dddd, MMMM Do"));
 
-
+//colors the time blocks
 var colorBlocks = function(timeAndDay, index){
-    // var currentHourEl = moment().format("YYYY-MM-D, hA");
+    // gets current time and sets as value
     var currentHourEl = moment().format();
-    // console.log(currentHourEl);
+    // formats timeAndDay to include the day as well
     timeAndDay = moment(timeAndDay, "hA").format();
-    // console.log(timeAndDay);
-
-    // timeAndDay = moment(timeAndDay, "hA").format("YYYY-MM-D, hA");
-    // console.log(timeAndDay);
-
-    // console.log(moment('5PM').isAfter('4PM', 'hour'));
-
-    // console.log(moment('2010-10-20').isAfter('2010-10-19'));
-    console.log(timeAndDay);
     
-    console.log(moment(currentHourEl, 'YYYY-MM-D, hA').isAfter(timeAndDay));
-    console.log(moment(currentHourEl, 'YYYY-MM-D, hA').isBefore(timeAndDay));  
-    // var after = moment(currentHourEl, 'YYYY-MM-D, hA').isAfter(timeAndDay); 
-    // var before = moment(currentHourEl, 'YYYY-MM-D, hA').isAfter(timeAndDay);    
-
+    // compares hours  
     if (moment(currentHourEl, 'YYYY-MM-D, hA').isBefore(timeAndDay)){
-        console.log(moment(currentHourEl, 'YYYY-MM-D, hA').isBefore(timeAndDay)); 
+        //if current time is before the timeAndDay variable then give id for the index the class future
         $("#hour"+ index).addClass("future");
     } else if (moment(currentHourEl, 'YYYY-MM-D, hA').isAfter(timeAndDay)){
+        //if current time is after the timeAndDay variable then give id for the index the class past
         $("#hour"+ index).addClass("past");
     } else{
+        //if neither then give id for the index the class present
         $("#hour"+ index).addClass("present");
     }
 }
 
 //creates card container and appends div and h4
 var createCard = function(text, index){
-    console.log(text);
-    console.log(index);
     var cardContainer = $("#time-blocks");
     cardContainer.append("<div class='card'><h4 id='hour"+ index +"' class='card-header d-flex align-items-center'>" + text + "</h4></div>");
 }
