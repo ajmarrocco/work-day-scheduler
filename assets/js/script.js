@@ -27,10 +27,29 @@ var colorBlocks = function(timeAndDay, index){
     }
 }
 
-//creates card container and appends div and h4
+//creates card container
 var createCard = function(text, index){
-    var cardContainer = $("#time-blocks");
-    cardContainer.append("<div class='card'><h4 id='hour"+ index +"' class='card-header d-flex align-items-center'>" + text + "</h4></div>");
+    var cardContainerEl = $("#time-blocks");
+    //sets var for label and adds text and class
+    var labelEL = $("<label>")
+        .text(text)
+        .addClass("col-1");
+    //sets var for input and adds text and class
+    var inputEL = $("<input>")
+        .attr('id', 'hour' + index)
+        .addClass("col-10");
+    //sets var for button and class
+    var buttonEL = $("<button>")
+        .addClass("col-1");
+    //adds icon to span
+    var spanEl = $("<span>")
+        .addClass("oi oi-lock-locked")
+    //appends div and input, label, button to cardContainer
+    cardContainerEl.append("<div class='card'></div>");
+    cardContainerEl.append(labelEL,inputEL,buttonEL);
+    //appends span to button
+    buttonEL.append(spanEl);
+
 }
 
 //adds AM or PM to time and changes zero to 12
