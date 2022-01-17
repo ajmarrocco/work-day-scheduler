@@ -7,9 +7,12 @@ var hours = 18;
 //sets text of currentTimeEl to current day
 currentTimeEl.text(moment().format("dddd, MMMM Do"));
 
-// var saveTasks = function() {
-//     localStorage.setItem("tasks", JSON.stringify(tasks));
-// };
+//saves tasks to local storage
+var saveTasks = function(index, labelEl, inputEl) {
+    $("#div" + index).on("click", "button", function(){
+        localStorage.setItem(labelEl.text(), inputEl.val());
+    })
+};
 
 // var loadTasks = function() {
 //     tasks = JSON.parse(localStorage.getItem("tasks"));
@@ -73,9 +76,8 @@ var createCard = function(text, index){
     //appends span to button
     buttonEl.append(spanEl);
 
-    $("#div" + index).on("click", "button", function(){
-        localStorage.setItem(labelEl.text(), inputEl.val());
-    })
+    //call saveTasks with index, labelEl and inputEl as parameters
+    saveTasks(index, labelEl, inputEl);
 }
 
 //adds AM or PM to time and changes zero to 12
