@@ -7,26 +7,19 @@ var hours = 18;
 //sets text of currentTimeEl to current day
 currentTimeEl.text(moment().format("dddd, MMMM Do"));
 
-//saves tasks to local storage
-var saveTasks = function(index, labelEl, inputEl) {
+// calls load events
+var loadEvents = function(formatTime, index){
+    //gets value of index from the format time
+    $("#input" + index).val(localStorage.getItem(formatTime));
+};
+
+//saves events to local storage
+var saveEvents = function(index, labelEl, inputEl) {
+    //click event for button
     $("#div" + index).on("click", "button", function(){
         localStorage.setItem(labelEl.text(), inputEl.val());
     })
 };
-
-// var loadTasks = function() {
-//     tasks = JSON.parse(localStorage.getItem("tasks"));
-
-//     // if nothing in localStorage, create a new object to track all task status arrays
-//     if (!tasks) {
-//         tasks = {
-//             toDo: [],
-//             inProgress: [],
-//             inReview: [],
-//             done: []
-//         };
-//     }
-// };
 
 //colors the time blocks
 var colorBlocks = function(timeAndDay, index){
@@ -38,13 +31,13 @@ var colorBlocks = function(timeAndDay, index){
     // compares hours  
     if (moment(currentHourEl, 'YYYY-MM-D, hA').isBefore(timeAndDay)){
         //if current time is before the timeAndDay variable then give id for the index the class future
-        $("#hour"+ index).addClass("future");
+        $("#input"+ index).addClass("future");
     } else if (moment(currentHourEl, 'YYYY-MM-D, hA').isAfter(timeAndDay)){
         //if current time is after the timeAndDay variable then give id for the index the class past
-        $("#hour"+ index).addClass("past");
+        $("#input"+ index).addClass("past");
     } else{
         //if neither then give id for the index the class present
-        $("#hour"+ index).addClass("present");
+        $("#input"+ index).addClass("present");
     }
 }
 
@@ -57,10 +50,11 @@ var createCard = function(text, index){
         .attr('id', 'div' + index);
     var labelEl = $("<label>")
         .text(text)
-        .addClass("col-1 d-inline-flex");
+        .addClass("col-1 d-inline-flex")
+        .attr('id', 'hour' + index);
     //sets var for input and adds text and class
     var inputEl = $("<input>")
-        .attr('id', 'hour' + index)
+        .attr('id', 'input' + index)
         .addClass("col-10 d-inline-flex");
     //sets var for button and class
     var buttonEl = $("<button>")
@@ -76,8 +70,8 @@ var createCard = function(text, index){
     //appends span to button
     buttonEl.append(spanEl);
 
-    //call saveTasks with index, labelEl and inputEl as parameters
-    saveTasks(index, labelEl, inputEl);
+    //call saveEvents with index, labelEl and inputEl as parameters
+    saveEvents(index, labelEl, inputEl);
 }
 
 //adds AM or PM to time and changes zero to 12
@@ -93,6 +87,7 @@ var timeBlocks = function(){
     for(let i=9; i < hours; i++){
         createCard(formatTime(i), i);
         colorBlocks(formatTime(i), i);
+        loadEvents(formatTime(i), i);
     }
 }
 
