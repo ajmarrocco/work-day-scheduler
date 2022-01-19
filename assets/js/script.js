@@ -48,6 +48,8 @@ var createCard = function(text, index){
     var divEl = $("<div>")
         .addClass("card")
         .attr('id', 'div' + index);
+    var rowEl = $("<div>")
+        .addClass("row");
     var labelEl = $("<label>")
         .text(text)
         .addClass("col-1 d-inline-flex")
@@ -55,17 +57,18 @@ var createCard = function(text, index){
     //sets var for input and adds text and class
     var inputEl = $("<input>")
         .attr('id', 'input' + index)
-        .addClass("col-10 d-inline-flex");
+        .addClass("col-10 d-inline-flex text-dark");
     //sets var for button and class
     var buttonEl = $("<button>")
         .addClass("col-1")
         .attr('id', 'btn' + index);
     //adds icon to span
     var spanEl = $("<span>")
-        .addClass("oi oi-lock-locked")
+        .addClass("oi oi-lock-locked text-white")
     //appends div and input, label, button to cardContainer
     cardContainerEl.append(divEl);
-    $(divEl).append(labelEl,inputEl,buttonEl);
+    divEl.append(rowEl);
+    rowEl.append(labelEl,inputEl,buttonEl);
 
     //appends span to button
     buttonEl.append(spanEl);
