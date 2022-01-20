@@ -27,7 +27,6 @@ var colorBlocks = function(timeAndDay, index){
     var currentHourEl = moment().format();
     // formats timeAndDay to include the day as well
     timeAndDay = moment(timeAndDay, "hA").format();
-    console.log(currentHourEl);
     // compares hours  
     if (moment(currentHourEl, 'YYYY-MM-D, hA').isBefore(timeAndDay)){
         //if current time is before the timeAndDay variable then give id for the index the class future
