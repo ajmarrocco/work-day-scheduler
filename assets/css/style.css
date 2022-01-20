@@ -1,18 +1,21 @@
+/* styles body font*/
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
 }
 
-textarea{
+/* styles input */
+input{
   background: transparent;
   border: none;
   resize: none;
   color: #000000;
   border-left: 1px solid black;
-  padding: 10px;
+  padding: 0px 10px 10px 10px;
 }
 
+/* styles jumbotron*/
 .jumbotron {
   text-align: center;
   background-color: transparent;
@@ -21,42 +24,52 @@ textarea{
   border-bottom: 10px solid black;
 }
 
+/* styles description white space*/
 .description{
   white-space: pre-wrap;
 }
 
+/* styles time-block text and border radius */
 .time-block{
   text-align: center;
   border-radius: 15px;
 }
 
+/* styles row class */
 .row {
   white-space: pre-wrap;
   height: 80px;
-  border-top: 1px solid white;;
+  border-top: 1px solid white;
 }
 
+/* styles hour */
 .hour {
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
+  text-align: right;
+  padding-top: 25px;
 }
 
+/* styles .past background*/
 .past {
   background-color: #d3d3d3;
-  color: white;
+  /* color: white; */
 }
 
+/* styles .present background*/
 .present {
   background-color: #ff6961;
-  color: white;
+  /* color: white; */
 }
 
+/* styles .future background*/
 .future {
   background-color: #77dd77;
-  color: white;
+  /* color: white; */
 }
 
+/*styles save button*/
 .saveBtn {
   border-left: 1px solid black;
   border-top-right-radius: 15px;
@@ -65,7 +78,19 @@ textarea{
   color: white;
 }
 
-.saveBtn i:hover {
+/*styles save button when it is hovered over*/
+.saveBtn:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
+  color: black;
+}
+
+/* this will be applied on any screen smaller than 980px */
+@media screen and (max-width: 980px) {
+
+  /* changes text align to left when screen is smaller than 980 */
+  .hour {
+    text-align: left;
+    padding-left: 0px;
+  }
 }

@@ -27,7 +27,7 @@ var colorBlocks = function(timeAndDay, index){
     var currentHourEl = moment().format();
     // formats timeAndDay to include the day as well
     timeAndDay = moment(timeAndDay, "hA").format();
-    
+    console.log(currentHourEl);
     // compares hours  
     if (moment(currentHourEl, 'YYYY-MM-D, hA').isBefore(timeAndDay)){
         //if current time is before the timeAndDay variable then give id for the index the class future
@@ -44,27 +44,29 @@ var colorBlocks = function(timeAndDay, index){
 //creates card container
 var createCard = function(text, index){
     var cardContainerEl = $("#time-blocks");
-    //sets var for label and adds text and class and div based on index
+    //sets var for div for time-block
     var divEl = $("<div>")
-        .addClass("card")
+        .addClass("time-block")
         .attr('id', 'div' + index);
+    //sets var for row for time-block
     var rowEl = $("<div>")
         .addClass("row");
+    //sets var for label and adds text and class
     var labelEl = $("<label>")
         .text(text)
-        .addClass("col-1 d-inline-flex")
+        .addClass("hour col-1")
         .attr('id', 'hour' + index);
     //sets var for input and adds text and class
     var inputEl = $("<input>")
         .attr('id', 'input' + index)
-        .addClass("col-10 d-inline-flex text-dark");
+        .addClass("col-10");
     //sets var for button and class
     var buttonEl = $("<button>")
-        .addClass("col-1")
+        .addClass("saveBtn col-1")
         .attr('id', 'btn' + index);
     //adds icon to span
     var spanEl = $("<span>")
-        .addClass("oi oi-lock-locked text-white")
+        .addClass("oi oi-lock-locked")
     //appends div and input, label, button to cardContainer
     cardContainerEl.append(divEl);
     divEl.append(rowEl);
